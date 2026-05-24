@@ -11,6 +11,7 @@ import authRoutes from './routes/authRoutes.js'
 import requestRoutes from './routes/requestRoutes.js'
 import availabilityRoutes from './routes/availabilityRoutes.js'
 import aiRoutes from './routes/aiRoutes.js'
+import publicRoutes from './routes/publicRoutes.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: join(__dirname, '.env') })
@@ -34,6 +35,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/requests', requestRoutes)
 app.use('/api/availability', availabilityRoutes)
 app.use('/api/ai', aiRoutes)
+app.use('/api/public', publicRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {

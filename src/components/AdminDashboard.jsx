@@ -61,11 +61,23 @@ export default function AdminDashboard({ user, onLogout }) {
     loadUsers()
   }, [])
 
+  const [notification, setNotification] = useState(null)
+
   // Real-time socket listeners
   useEffect(() => {
     const onCreated = (req) => {
       setRequests(prev => [req, ...prev])
       loadAvailability()
+      // Sound notification
+      try {
+        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbsGczIjmf2teleicZPKDY6bhrKB84ptrsunIvJDmx3em6dDEoQbff5blyLyk/ud/mt3MuKUK94OW3cy4pQr3g5bdzLilCveDlt3MuKUK94OW3cy4pQr3g5bdzLilCvd/lt3MuKQ==')
+        audio.volume = 0.5
+        audio.play().catch(() => {})
+      } catch {}
+      // Visual notification
+      const label = req.source === 'public' ? 'Visiteur' : 'Client'
+      setNotification(`Nouvelle demande de ${req.clientName} (${label})`)
+      setTimeout(() => setNotification(null), 5000)
     }
     const onUpdated = (req) => {
       setRequests(prev => prev.map(r => r._id === req._id ? req : r))
@@ -160,6 +172,7 @@ export default function AdminDashboard({ user, onLogout }) {
   }
 
   const handleDeleteUser = async (id) => {
+    if (!window.confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) return
     try {
       await apiDeleteUser(id)
       setUsers(prev => prev.filter(u => u._id !== id))
@@ -219,6 +232,13 @@ export default function AdminDashboard({ user, onLogout }) {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Notification toast */}
+        {notification && (
+          <div className="fixed top-4 right-4 z-50 bg-gradient-to-r from-primary to-primary-light text-white px-6 py-4 rounded-2xl shadow-2xl animate-[slideIn_0.3s_ease-out] flex items-center gap-3 max-w-sm">
+            <div className="w-3 h-3 bg-white rounded-full animate-pulse shrink-0"></div>
+            <p className="text-sm font-medium">{notification}</p>
+          </div>
+        )}
         {/* Welcome banner */}
         <div className="bg-gradient-to-r from-primary via-primary-light to-[#004a7a] rounded-3xl p-8 text-white mb-8 relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
@@ -286,6 +306,13 @@ export default function AdminDashboard({ user, onLogout }) {
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border ${STATUS_COLORS[req.status]}`}>
                         <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[req.status]}`}></span>
                         {req.status}
+                      </span>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                        req.source === 'public'
+                          ? 'bg-orange-50 text-orange-600 border border-orange-200'
+                          : 'bg-blue-50 text-blue-600 border border-blue-200'
+                      }`}>
+                        {req.source === 'public' ? 'Visiteur' : 'Client'}
                       </span>
                       <button
                         onClick={() => deleteRequest(req._id)}

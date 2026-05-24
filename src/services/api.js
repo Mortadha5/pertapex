@@ -76,6 +76,12 @@ export const deleteUser = (id) =>
     method: 'DELETE',
   })
 
+export const createClientByAdmin = (data) =>
+  request('/auth/create-client', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
 /* ==========================
    REQUESTS
 ========================== */
@@ -135,6 +141,19 @@ export const removeAllSlotsForDate = (date) =>
     method: 'DELETE',
   })
 
+/* ==========================
+   PUBLIC (no auth required)
+========================== */
+
+export const getPublicAvailability = () =>
+  request('/public/availability')
+
+export const createPublicRequest = (payload) =>
+  request('/public/requests', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+
 export default {
   login,
   register,
@@ -150,4 +169,6 @@ export default {
   addAvailabilitySlot,
   removeAvailabilitySlot,
   removeAllSlotsForDate,
+  getPublicAvailability,
+  createPublicRequest,
 }

@@ -4,7 +4,12 @@ const requestSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: false,
+  },
+  source: {
+    type: String,
+    enum: ['client', 'public'],
+    default: 'client',
   },
   clientName: {
     type: String,
@@ -25,11 +30,13 @@ const requestSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: [
+      'Prise de rendez-vous',
+      'Demande d\'information',
+      'Autre',
       'Transformation numérique',
       'Gestion administrative et commerciale',
       'Ressources humaines et paie',
       'Conseil stratégique',
-      'Autre',
     ],
   },
   subject: {

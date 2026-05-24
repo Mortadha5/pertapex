@@ -9,8 +9,8 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' })
 }
 
-// POST /api/auth/register — admin creates a new user
-router.post('/register', protect, adminOnly, async (req, res) => {
+// POST /api/auth/register or /api/auth/create-client — admin creates a new user
+const createClientHandler = async (req, res) => {
   try {
     const { name, email, password, role } = req.body
 
@@ -42,7 +42,10 @@ router.post('/register', protect, adminOnly, async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Erreur serveur.', error: error.message })
   }
-})
+}
+
+router.post('/register', protect, adminOnly, createClientHandler)
+router.post('/create-client', protect, adminOnly, createClientHandler)
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {

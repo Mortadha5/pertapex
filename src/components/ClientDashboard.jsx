@@ -8,10 +8,8 @@ import { getAvailability, createRequest, getRequests } from '../services/api'
 import socket from '../services/socket'
 
 const REQUEST_TYPES = [
-  'Transformation numérique',
-  'Gestion administrative et commerciale',
-  'Ressources humaines et paie',
-  'Conseil stratégique',
+  'Prise de rendez-vous',
+  'Demande d\'information',
   'Autre',
 ]
 
