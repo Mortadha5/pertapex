@@ -46,10 +46,10 @@ export default function Hero() {
             <ArrowDown size={18} className="group-hover:translate-y-0.5 transition-transform" />
           </a>
           <a
-            href="#contact"
+            href="#contact-form"
             className="border-2 border-white/40 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 hover:border-white/70 transition-all text-sm sm:text-base backdrop-blur-sm"
           >
-            Nous Contacter
+            Prendre un rendez-vous
           </a>
         </div>
 

@@ -43,6 +43,16 @@ export default function Contact() {
     clientName: '', email: '', phone: '', requestType: '', subject: '', message: '', preferredDate: '', timeSlot: ''
   })
 
+  // Auto-open form if navigated via #contact-form
+  useEffect(() => {
+    if (window.location.hash === '#contact-form') {
+      setShowForm(true)
+      setTimeout(() => {
+        document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }, [])
+
   useEffect(() => {
     if (showForm) {
       getPublicAvailability().then(setAvailability).catch(() => {})
@@ -135,7 +145,7 @@ export default function Contact() {
 
         {/* Public Request Form */}
         {showForm && (
-          <div className="mt-10 bg-white rounded-3xl border border-gray-100 shadow-xl p-8 sm:p-10">
+          <div id="contact-form" className="mt-10 bg-white rounded-3xl border border-gray-100 shadow-xl p-8 sm:p-10">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h3 className="text-2xl font-bold text-primary">Formulaire de demande</h3>
