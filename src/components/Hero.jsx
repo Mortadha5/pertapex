@@ -20,12 +20,6 @@ export default function Hero() {
       <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-8">
-          <Sparkles size={16} className="text-yellow-300" />
-          <span className="text-white/90 text-sm font-medium">Votre partenaire stratégique depuis 2020</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight">
           OPTIMISEZ VOTRE GESTION,{' '}
           <span className="bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
