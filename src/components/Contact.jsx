@@ -122,7 +122,7 @@ export default function Contact() {
         </div>
 
         {/* Faire une demande */}
-        <div className="mt-16 bg-gradient-to-br from-primary to-primary-light rounded-3xl p-10 sm:p-14 text-center">
+        <div id="faire-demande" className="mt-16 bg-gradient-to-br from-primary to-primary-light rounded-3xl p-10 sm:p-14 text-center">
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Faire une demande</h3>
           <p className="text-white/75 text-lg mb-8 max-w-xl mx-auto">Choisissez comment vous souhaitez nous contacter.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
