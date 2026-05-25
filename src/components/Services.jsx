@@ -1,4 +1,4 @@
-import { Monitor, FileText, Users, Lightbulb, ArrowRight } from 'lucide-react'
+import { Monitor, FileText, Users, Lightbulb } from 'lucide-react'
 
 const services = [
   {
@@ -62,10 +62,6 @@ export default function Services() {
               </div>
               <h3 className="text-xl font-bold text-white group-hover:text-primary mb-3 transition-colors duration-300">{service.title}</h3>
               <p className="text-white/70 group-hover:text-text/80 leading-relaxed transition-colors duration-300">{service.description}</p>
-              <div className="mt-6 flex items-center gap-2 text-white/50 group-hover:text-primary text-sm font-medium transition-colors duration-300">
-                <span>En savoir plus</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </div>
             </div>
           ))}
         </div>
